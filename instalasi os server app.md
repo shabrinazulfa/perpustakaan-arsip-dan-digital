@@ -176,7 +176,7 @@ nvim /etc/locale.conf
 isi lang=C menjadi lang=en_US.UTF-8 dan 
 isi ALL=en_US.UTF-8
 ```
-## 1. Membuat User
+## 11. Membuat User
 
 ### Membuat Direktori Home
 
