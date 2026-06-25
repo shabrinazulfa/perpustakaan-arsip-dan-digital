@@ -66,7 +66,7 @@ lvcreate -L 1G -n vaud wc
 lvcreate -L 1G -n home wc 
 lvcreate -L 1.5G -n vtmp wc 
 lvcreate -L 9G -n podman wc 
-lvcreate -l 100%FREE -n ngapa wc
+lvcreate -l l50%FREE -n ngapa wc
 ```
 ### Verifikasi Logical Volume
 ```bash
@@ -86,32 +86,34 @@ mkfs.ext4 /dev/wc/home
 mkfs.ext4 /dev/wc/vtmp 
 mkfs.ext4 /dev/wc/podman 
 mkfs.ext4 /dev/wc/ngapa
+mkfs.ext4 /dev/mapper/ngape     
 ```
 
----
-
+## 4. Konfigurasi LUKS
+```bash
+cryptsetup luksFormat /dev/wc/ngapa
+```
+```bash
+cryptsetup luksOpen /dev/wc/ngapa ngape   
+```
 ## 5. Mount Partisi
 
 ### Mount Root
 ```bash
 mount /dev/wc/root /mnt
-
-### Mount EFI Partition
-
+```
+### Mount Filesystem
 ```bash
-mount --mkdir /dev/nvme0n1p6 /mnt/boot
-
-### Mount Logical Volume Tambahan
-
-```bash
-mount --mkdir /dev/wc/home /mnt/home
-mount --mkdir /dev/wc/vars /mnt/var
-mount --mkdir /dev/wc/vlog /mnt/var/log
-mount --mkdir /dev/wc/vaud /mnt/var/log/audit
-mount --mkdir /dev/wc/vtmp /mnt/var/tmp
-mount --mkdir /dev/wc/podman /mnt/var/lib/containers
-mount --mkdir /dev/wc/ngapa /mnt/ngapa
-
+mount /dev/wc/root /mnt
+mount --mkdir -o uid=0,gid=0,fmask=0077,dmask=0077 /dev/nvme0n1p6 /mnt/boot   
+mount --mkdir -o rw,nodev,nosuid,relatime /dev/wc/vars /mnt/var
+mount --mkdir -o rw,nodev,noexec,nosuid,relatime /dev/wc/vlog /mnt/var/log
+mount --mkdir -o rw,nodev,noexec,nosuid,relatime /dev/wc/vaud /mnt/var/log/audit
+mount --mkdir -o rw,nodev,noexec,nosuid,relatime /dev/wc/home /mnt/home
+mount --mkdir -o rw,nodev,noexec,nosuid,relatime /dev/wc/vtmp /mnt/var/tmp
+mount --mkdir -o rw,nodev,noexec,nosuid,relatime /dev/wc/podman /mnt/var/lib/containers
+```
+       
 ### Verifikasi Mount
 
 ```bash
@@ -121,9 +123,16 @@ lsblk
 ## 6. Install Package 
 
 ```bash
-pacstrap /mnt base intel-ucode linux-hardened linux-hardened-headers linux-firmware mkinitcpio lvm2 openssh firewalld podman pacman sudo wget git neovim iwd grep which     
+pacstrap /mnt base intel-ucode linux-hardened linux-hardened-headers linux-firmware mkinitcpio lvm2 openssh firewalld podman pacman sudo wget git neovim iwd grep which pam_mount     
 ```
-
+## 7. Genfstab
+```bash
+genfstab -U /mnt > /mnt/etc/fstab
+```
+## 8. Mounting RAM
+```bash
+echo "tmpfs /tmp tmpfs deafults,rw,nodev,nosuid,noexec,relatime,size=512M 0 0" >> /mnt/etc/fstab
+```
 ## 7. Konfigurasi Sistem
 
 Masuk ke sistem yang baru diinstal:
