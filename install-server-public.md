@@ -6,7 +6,7 @@
 iwctl
 ```
 
-Membuka utilitas **iNet Wireless Daemon (iwd)** untuk mengelola koneksi jaringan nirkabel. Selama proses instalasi, CIS merekomendasikan penggunaan jaringan yang aman dan terpercaya agar proses pengunduhan paket terhindar dari risiko manipulasi maupun penyadapan data.
+Membuka utilitas **iNet Wireless Daemon (iwd)** untuk mengelola koneksi jaringan nirkabel. Selama proses instalasi, CIS merekomendasikan penggunaan jaringan yang aman dan terpercaya supaya proses pengunduhan paket terhindar dari risiko manipulasi maupun penyadapan data.
 
 ---
 
@@ -14,7 +14,7 @@ Membuka utilitas **iNet Wireless Daemon (iwd)** untuk mengelola koneksi jaringan
 device list
 ```
 
-Menampilkan daftar perangkat Wi-Fi yang dikenali oleh sistem. Langkah ini dilakukan untuk memastikan adaptor jaringan telah terdeteksi sehingga proses konfigurasi dapat berjalan dengan baik.
+Menampilkan daftar perangkat Wi-Fi yang dikenali oleh sistem. Langkah ini dilakukan buat memastikan kalau si adaptor jaringan ini telah terdeteksi sehingga proses konfigurasi dapat berjalan dengan baik.
 
 ---
 
@@ -22,7 +22,7 @@ Menampilkan daftar perangkat Wi-Fi yang dikenali oleh sistem. Langkah ini dilaku
 station wlan0 get-networks
 ```
 
-Menampilkan daftar jaringan Wi-Fi yang tersedia di sekitar perangkat. Pemilihan jaringan yang terpercaya membantu menjaga keamanan selama proses instalasi sistem.
+Menampilkan daftar jaringan Wi-Fi yang tersedia di sekitar perangkat. Memilih jaringan yang terpercaya akan membantu menjaga keamanan selama proses instalasi sistem.
 
 ---
 
@@ -30,7 +30,7 @@ Menampilkan daftar jaringan Wi-Fi yang tersedia di sekitar perangkat. Pemilihan 
 station wlan0 scan
 ```
 
-Melakukan pemindaian ulang terhadap jaringan Wi-Fi agar daftar jaringan yang ditampilkan merupakan kondisi terbaru.
+Melakukan pemindaian ulang terhadap jaringan Wi-Fi agar daftar jaringan yang ditampilkan itu kondisi terbaru.
 
 ---
 
@@ -39,7 +39,7 @@ station wlan0 connect "(nama wifi)"
 exit
 ```
 
-Menghubungkan perangkat ke jaringan Wi-Fi kemudian keluar dari utilitas **iwd** setelah koneksi berhasil dilakukan.
+Menghubungkan perangkat ke jaringan Wi-Fi terus keluar dari utilitas **iwd** kalau koneksi udah berhasil dilakukan.
 
 ---
 
@@ -57,7 +57,7 @@ Menguji koneksi internet untuk memastikan sistem dapat mengakses repositori resm
 lsblk
 ```
 
-Menampilkan seluruh perangkat penyimpanan beserta struktur partisinya. Pemeriksaan ini penting untuk memastikan administrator memilih media penyimpanan yang benar sebelum melakukan proses partisi.
+Menampilkan seluruh perangkat penyimpanan beserta struktur partisinya. Pemeriksaan ini penting buat mastiin si administrator ini memilih media penyimpanan yang benar sebelum melakukan proses partisi.
 
 ---
 
